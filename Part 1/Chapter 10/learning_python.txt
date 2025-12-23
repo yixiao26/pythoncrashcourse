@@ -1,0 +1,4 @@
+In Python you can make lists
+In Python you can read files
+In Python you can open files 
+In Python you can loop through lists 
