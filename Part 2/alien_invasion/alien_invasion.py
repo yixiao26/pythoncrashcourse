@@ -29,8 +29,12 @@ def run_game():
     while True:
         # Watch for keyboard and mouse events
         gf.check_events(ai_settings, screen, ship, bullets)
+
+        # object should update their own information
         ship.update()
         gf.update_bullets(bullets)
+
+        # draw all objects in game
         gf.update_screen(ai_settings, screen, ship, aliens, bullets)
 
 
