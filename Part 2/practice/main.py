@@ -5,7 +5,9 @@ from screen import Settings
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from alien import create_fleet_aliens
 import event
+import object_clearer as oc
 
 
 def main():
@@ -23,21 +25,26 @@ def main():
     ship = Ship(window)
     ships.add(ship)
 
-    bullet = Bullet()
-    bullets.add(bullet)
 
-    alien = Alien()
-    aliens.add(alien)
+    create_fleet_aliens(aliens, window, ship)
+
+
+
+
 
     # Main loop
     while True:
         # Handle key events
-        event.check_events(ships, bullets, aliens)
+        event.check_events(ship, bullets, aliens, settings)
 
         # Update object information
         ships.update()
         bullets.update()
         aliens.update()
+
+        # Clear all unneeded objects
+        oc.clear_bullet(bullets)
+
 
         # Fill screen
         window.fill(settings.window_color)

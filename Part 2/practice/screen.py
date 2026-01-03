@@ -7,3 +7,6 @@ class Settings:
         self.window_width = 1200
         self.window_height = 800
         self.window_color = (230, 230, 230)
+
+
+        self.bullets_allowed = 3
