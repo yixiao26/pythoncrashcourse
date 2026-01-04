@@ -13,7 +13,7 @@ import object_clearer as oc
 def main():
     # Standard pygame stuff
     pygame.init()
-    pygame.display.set_caption("Alien Invasion")
+    pygame.display.set_caption("Version 1")
 
     # Create objects
     settings = Settings()
