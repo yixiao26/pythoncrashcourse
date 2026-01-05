@@ -3,10 +3,12 @@ from utility import load_image
 
 
 class Alien(Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, settings):
         """Initialize the ship and set its starting position."""
         super().__init__()
 
+        self.speed_factor = 1
+        self.settings = settings
         # Load image
         self.image = load_image("alien.bmp")
         self.rect = self.image.get_rect()
@@ -14,7 +16,12 @@ class Alien(Sprite):
         self.rect.y = y
 
     def update(self):
-        pass
+        self.rect.y += self.speed_factor
+        if self.rect.top > self.settings.window_height:
+            self.rect.bottom = 0
+
+
+
 
 
 def get_alien_coordinates(alien, window, ship):
@@ -38,11 +45,11 @@ def get_alien_coordinates(alien, window, ship):
         return x, y
     
         
-def create_fleet_aliens(aliens, window, ship):
-    alien = Alien(0, 0)
+def create_fleet_aliens(aliens, window, ship, settings):
+    alien = Alien(0, 0, settings)
     x_coor_list, y_coor_list = get_alien_coordinates(alien, window, ship)
 
     for x_coor in x_coor_list:
         for y_coor in y_coor_list:
-            alien = Alien(x_coor, y_coor)
+            alien = Alien(x_coor, y_coor, settings)
             aliens.add(alien)

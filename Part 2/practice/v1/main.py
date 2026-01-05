@@ -26,7 +26,7 @@ def main():
     ships.add(ship)
 
 
-    create_fleet_aliens(aliens, window, ship)
+    create_fleet_aliens(aliens, window, ship, settings)
 
 
 
