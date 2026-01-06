@@ -16,4 +16,5 @@ class Settings:
     bullet_colour = (0, 0, 0)
     bullets_allowed = 3
 
-    # Alien settings
+    # Game settings
+    games_allowed = 3
