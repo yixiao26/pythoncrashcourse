@@ -132,8 +132,16 @@ Ships on the left
 
 ## Collision manager module
 
-collisions.py manages the collisions of all groups
+collision_manager.py manages the collisions of all groups
 Aliens and Ships collisions result in a round lost
 Aliens and Bullets collisions result in removal of the alien
 Bullets and top of screen collisions result in removal of the bullet
 Alien and the bottom of the screen collisions result in the round lost
+
+## Object manager module
+
+object_manager.py manages all objects and their response to key events.
+'left' moves the ship left.
+'right' moves the ship right.
+'space' shoots a bullet.
+'q' quits the game.
