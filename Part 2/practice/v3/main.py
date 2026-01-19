@@ -6,6 +6,7 @@ from ship import Ship
 from object_manager import check_events
 from bullet import Bullet
 from alien import Alien
+from alien_fleet import create_alien_fleet
 
 
 def main():
@@ -23,9 +24,10 @@ def main():
     bullets = Group()
 
     aliens = Group()
-    alien = Alien(window)
+    alien = Alien(window, 0, 0)
     aliens.add(alien)
 
+    create_alien_fleet(settings, aliens, ship)
     # Main loop
     while True:
         # Handle events
@@ -45,6 +47,7 @@ def main():
         ships.draw(window)
         bullets.draw(window)
         aliens.draw(window)
+
         pygame.display.flip()
 
 
