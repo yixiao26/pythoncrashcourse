@@ -9,7 +9,6 @@ def aliens_per_row(settings):
     row = settings_width // (2 * alien_width)
     for i in range(row):
         aliens_per_row.append(i * 2 * alien_width)
-    print(aliens_per_row)
     return aliens_per_row
 
 
@@ -22,17 +21,35 @@ def aliens_per_column(settings, ship):
     column = (settings_height - 3 * ship_height) // (2 * alien_height)
     for i in range(column):
         aliens_per_column.append(i * 2 * alien_height)
-    print(aliens_per_column)
     return aliens_per_column
 
 
 def create_alien_fleet(settings, aliens, ship):
-    alien = Alien(settings, 0, 0)
     for x in aliens_per_column(settings, ship):
         for y in aliens_per_row(settings):
             alien = Alien(settings, y, x)
             aliens.add(alien)
 
 
-def alien_fleet_update():
-    pass
+def alien_fleet_update(aliens, settings):
+    if has_hit_edge(aliens, settings):
+        change_direction(aliens)
+        drop(aliens)
+    aliens.update()
+
+
+def change_direction(aliens):
+    for alien in aliens.sprites():
+        alien.moving_speed *= -1
+
+
+def drop(aliens):
+    for alien in aliens.sprites():
+        alien.rect.y += alien.dropping_speed
+
+
+def has_hit_edge(aliens, settings):
+    for alien in aliens.sprites():
+        if alien.rect.right > settings.width or alien.rect.left < 0:
+            return True
+    return False

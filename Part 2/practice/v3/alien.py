@@ -7,8 +7,6 @@ class Alien(Sprite):
     def __init__(self, settings, x, y):
         super().__init__()
         self.settings = settings
-        self.x = x
-        self.y = y
 
         folder = Path(__file__).parent.resolve()
         self.image = pygame.image.load(folder / "images" / "alien.bmp")
@@ -17,6 +15,8 @@ class Alien(Sprite):
         self.rect.x = x
         self.rect.y = y
 
+        self.moving_speed = 1
+        self.dropping_speed = 10
+
     def update(self):
-        self.rect.x = self.x
-        self.rect.y = self.y
+        self.rect.x += self.moving_speed

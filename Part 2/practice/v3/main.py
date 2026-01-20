@@ -7,6 +7,9 @@ from object_manager import check_events
 from bullet import Bullet
 from alien import Alien
 from alien_fleet import create_alien_fleet
+from alien_fleet import alien_fleet_update
+
+clock = pygame.time.Clock()
 
 
 def main():
@@ -28,6 +31,7 @@ def main():
     aliens.add(alien)
 
     create_alien_fleet(settings, aliens, ship)
+
     # Main loop
     while True:
         # Handle events
@@ -36,7 +40,7 @@ def main():
         # Update object information
         ships.update()
         bullets.update()
-        aliens.update()
+        alien_fleet_update(aliens, settings)
 
         # Remove unneeded objects
 
@@ -49,6 +53,8 @@ def main():
         aliens.draw(window)
 
         pygame.display.flip()
+
+        clock.tick(220)
 
 
 main()
