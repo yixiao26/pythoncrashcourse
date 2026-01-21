@@ -8,6 +8,10 @@ from bullet import Bullet
 from alien import Alien
 from alien_fleet import create_alien_fleet
 from alien_fleet import alien_fleet_update
+from collision_manager import ship_collision_aliens
+from collision_manager import aliens_collision_bullets
+from collision_manager import aliens_screen_bottom
+from collision_manager import destroy_game
 
 clock = pygame.time.Clock()
 
@@ -35,7 +39,7 @@ def main():
     # Main loop
     while True:
         # Handle events
-        check_events(ship, bullets)
+        check_events(ship, bullets, settings)
 
         # Update object information
         ships.update()
@@ -43,6 +47,10 @@ def main():
         alien_fleet_update(aliens, settings)
 
         # Remove unneeded objects
+        ship = ship_collision_aliens(ship, ships, aliens, settings, window)
+        aliens_collision_bullets(aliens, bullets)
+        ship = aliens_screen_bottom(settings, aliens, ships, window, ship)
+        destroy_game(settings, ships, aliens, bullets)
 
         # Fill screen
         window.fill(settings.bg_color)
