@@ -12,6 +12,7 @@ from collision_manager import ship_collision_aliens
 from collision_manager import aliens_collision_bullets
 from collision_manager import aliens_screen_bottom
 from collision_manager import destroy_game
+from button import Button
 
 clock = pygame.time.Clock()
 
@@ -34,17 +35,23 @@ def main():
     alien = Alien(window, 0, 0)
     aliens.add(alien)
 
+    button = Button(settings)
+    buttons = Group()
+    buttons.add(button)
+
     create_alien_fleet(settings, aliens, ship)
 
     # Main loop
     while True:
-        # Handle events
-        check_events(ship, bullets, settings)
 
-        # Update object information
+        # Handle events
+        check_events(bullets, settings, button, buttons, window, ships, aliens, ship)
+
+        # Update object positions
         ships.update()
         bullets.update()
         alien_fleet_update(aliens, settings)
+        buttons.update(settings)
 
         # Remove unneeded objects
         ship = ship_collision_aliens(ship, ships, aliens, settings, window)
@@ -59,6 +66,7 @@ def main():
         ships.draw(window)
         bullets.draw(window)
         aliens.draw(window)
+        buttons.draw(window)
 
         pygame.display.flip()
 

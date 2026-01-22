@@ -1,9 +1,12 @@
 import pygame
 import sys
 from bullet import Bullet
+from collision_manager import on_click
+from button import Button
+from pygame.sprite import Group
 
 
-def check_events(ship, bullets, settings):
+def check_events(bullets, settings, button, buttons, window, ships, aliens, ship):
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             handle_keydown(event, ship, bullets, settings)
@@ -11,6 +14,14 @@ def check_events(ship, bullets, settings):
             handle_keyup(event, ship, settings)
         if event.type == pygame.QUIT:
             sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            handle_mouse_click(settings, button, buttons, window, ships, aliens, ship)
+
+
+def handle_mouse_click(settings, button, buttons, window, ships, aliens, ship):
+    if not settings.game_active and button.rect.collidepoint(pygame.mouse.get_pos()):
+        print("Button clicked")
+        on_click(settings, buttons, window, ships, aliens, ship)
 
 
 def handle_keydown(event, ship, bullets, settings):

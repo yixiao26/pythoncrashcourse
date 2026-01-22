@@ -25,20 +25,21 @@ def create_new_ship_and_alien_fleet(settings, window, ships, aliens, ship):
         return ship
     else:
         settings.game_active = False
+        return ship
 
 
 def destroy_game(settings, ships, aliens, bullets):
     if settings.game_active == False:
         empty_ships_and_aliens(ships, aliens)
         bullets.empty()
+        print("Game is inactive")
+        return
 
 
 def aliens_collision_bullets(aliens, bullets):
     for alien, bullet in aliens_bullets_collision_pairs(aliens, bullets).items():
         aliens.remove(alien)
         bullets.remove(bullet)
-    print(f"Aliens left: {len(aliens)}")
-    print(f"Bullets left: {len(bullets)}")
 
 
 def aliens_bullets_collision_pairs(aliens, bullets):
@@ -58,3 +59,11 @@ def alien_reach_bottom(settings, aliens):
         if alien.rect.bottom >= settings.height:
             return True
     return False
+
+
+def on_click(settings, buttons, window, ships, aliens, ship):
+    settings.ship_lives = 3
+    settings.game_active = True
+    create_new_ship_and_alien_fleet(settings, window, ships, aliens, ship)
+    # pygame.mouse.set_visible(False)
+    # buttons.empty()
