@@ -25,14 +25,15 @@ def aliens_per_column(settings, ship):
 
 
 def create_alien_fleet(settings, aliens, ship):
-    for x in aliens_per_column(settings, ship):
-        for y in aliens_per_row(settings):
-            alien = Alien(settings, y, x)
+    for y in aliens_per_column(settings, ship):
+        for x in aliens_per_row(settings):
+            alien = Alien(settings, x, y)
             aliens.add(alien)
 
 
 def alien_fleet_update(aliens, settings):
     if has_hit_edge(aliens, settings):
+        print("HIT EDGE - DROPPING")
         change_direction(aliens)
         drop(aliens)
     aliens.update()

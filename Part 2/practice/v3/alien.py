@@ -16,7 +16,7 @@ class Alien(Sprite):
         self.rect.y = y
 
         self.moving_speed = 1
-        self.dropping_speed = 50
+        self.dropping_speed = 10
 
     def update(self):
         self.rect.x += self.moving_speed

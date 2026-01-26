@@ -15,13 +15,15 @@ def check_events(bullets, settings, button, buttons, window, ships, aliens, ship
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
-            handle_mouse_click(settings, button, buttons, window, ships, aliens, ship)
+            ship = handle_mouse_click(settings, button, buttons, window, ships, aliens, ship)
+    return ship
 
 
 def handle_mouse_click(settings, button, buttons, window, ships, aliens, ship):
     if not settings.game_active and button.rect.collidepoint(pygame.mouse.get_pos()):
         print("Button clicked")
-        on_click(settings, buttons, window, ships, aliens, ship)
+        ship = on_click(settings, buttons, window, ships, aliens, ship)
+    return ship
 
 
 def handle_keydown(event, ship, bullets, settings):
@@ -52,3 +54,4 @@ def handle_keyup(event, ship, settings):
         ship.moving_right = False
     elif event.key == pygame.K_LEFT:
         ship.moving_left = False
+

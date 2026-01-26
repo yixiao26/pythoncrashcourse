@@ -21,7 +21,6 @@ class Ship(Sprite):
         self.moving_speed = 2
         self.bullets_allowed = 3
 
-
     def update(self):
         if self.moving_right and self.rect.right < self.window.get_rect().right:
             self.rect.x += self.moving_speed

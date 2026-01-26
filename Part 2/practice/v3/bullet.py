@@ -6,8 +6,9 @@ class Bullet(Sprite):
     def __init__(self, ship):
         super().__init__()
 
+        self.ship = ship
         self.bullet_height = 15
-        self.bullet_width = 3
+        self.bullet_width = 1000
         self.bullet_color = (0, 0, 0)
         self.bullet_speed = 1
 
@@ -18,6 +19,7 @@ class Bullet(Sprite):
         self.rect.top = ship.rect.top
 
     def update(self):
+        self.x = self.ship.rect.x
         self.rect.y -= self.bullet_speed
         if self.rect.bottom < 0:
             self.kill()
