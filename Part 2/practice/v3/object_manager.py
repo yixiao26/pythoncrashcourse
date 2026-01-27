@@ -21,7 +21,6 @@ def check_events(bullets, settings, button, buttons, window, ships, aliens, ship
 
 def handle_mouse_click(settings, button, buttons, window, ships, aliens, ship):
     if not settings.game_active and button.rect.collidepoint(pygame.mouse.get_pos()):
-        print("Button clicked")
         ship = on_click(settings, buttons, window, ships, aliens, ship)
     return ship
 

@@ -37,7 +37,6 @@ def destroy_game(settings, ships, aliens, bullets):
 
 
 def player_defeats_aliens(settings, aliens, ship, bullets, ships):
-    print("player_defeats_aliens")
     if settings.game_active and len(aliens) == 0 and settings.ship_lives > 0:
         create_alien_fleet(settings, aliens, ship)
         settings.level += 1
@@ -48,21 +47,19 @@ def player_defeats_aliens(settings, aliens, ship, bullets, ships):
 def update_speed(settings, bullets, aliens, ships):
     for bullet in bullets:
         bullet.bullet_speed = bullet.bullet_speed + settings.level
-        print(bullet.bullet_speed)
 
     for alien in aliens:
         alien.moving_speed = alien.moving_speed + settings.level
-        print(alien.moving_speed)
 
     for ship in ships:
         ship.moving_speed = ship.moving_speed + settings.level
-        print(ship.moving_speed)
 
 
-def aliens_collision_bullets(aliens, bullets):
+def aliens_collision_bullets(aliens, bullets, settings):
     for alien, bullet in aliens_bullets_collision_pairs(aliens, bullets).items():
         aliens.remove(alien)
         bullets.remove(bullet)
+        update_score(settings)
 
 
 def aliens_bullets_collision_pairs(aliens, bullets):
@@ -87,6 +84,8 @@ def alien_reach_bottom(settings, aliens):
 
 def on_click(settings, buttons, window, ships, aliens, ship):
     settings.ship_lives = 3
+    settings.score = 0
+    settings.level = 0
     settings.game_active = True
     create_alien_fleet(settings, aliens, ship)
     ship = Ship(window)
@@ -94,3 +93,16 @@ def on_click(settings, buttons, window, ships, aliens, ship):
     # pygame.mouse.set_visible(False)
     buttons.empty()
     return ship
+
+
+def update_score(settings):
+    settings.score += 50 * (settings.level + 1)
+    return settings.score
+
+
+def update_high_score():
+    pass
+
+
+def update_level():
+    pass

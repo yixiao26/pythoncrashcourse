@@ -5,12 +5,20 @@ from pygame.sprite import Sprite
 class HighScore(Sprite):
     def __init__(self, settings):
         super().__init__()
-        self.high_score = 0
         self.settings = settings
         font = pygame.font.SysFont(None, 48)
-        self.image = font.render(str(self.high_score), True, self.settings.text_color)
+        self.image = font.render(
+            str(self.settings.high_score), True, self.settings.text_color
+        )
         self.rect = self.image.get_rect()
 
     def update(self):
-        self.rect.centerx = self.settings.width - 20
+        if self.settings.score > self.settings.high_score:
+            self.settings.high_score = self.settings.score
+
+        font = pygame.font.SysFont(None, 48)
+        self.image = font.render(
+            str(self.settings.high_score), True, self.settings.text_color
+        )
+        self.rect.right = self.settings.width - 60
         self.rect.top = 0

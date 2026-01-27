@@ -33,7 +33,6 @@ def create_alien_fleet(settings, aliens, ship):
 
 def alien_fleet_update(aliens, settings):
     if has_hit_edge(aliens, settings):
-        print("HIT EDGE - DROPPING")
         change_direction(aliens)
         drop(aliens)
     aliens.update()

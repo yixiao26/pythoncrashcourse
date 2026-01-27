@@ -52,8 +52,11 @@ def main():
     level = Level(settings)
 
     ship_lives_x_coor = [0, 30, 60]
+    ship_icons = []
     for x in ship_lives_x_coor:
         lives = Lives(x)
+        ship_icons.append(lives)
+
         scoreboard.add(lives)
 
     scoreboard.add(score)
@@ -73,7 +76,20 @@ def main():
         )
 
         player_defeats_aliens(settings, aliens, ship, bullets, ships)
-        print(settings.level)
+
+        # Update ship lives display
+        for icon in ship_icons:
+            if icon not in scoreboard:
+                scoreboard.add(icon)
+        
+        if settings.ship_lives == 0:
+            for icon in ship_icons:
+                scoreboard.remove(icon)
+        elif settings.ship_lives == 1:
+            scoreboard.remove(ship_icons[1])
+            scoreboard.remove(ship_icons[2])
+        elif settings.ship_lives == 2:
+            scoreboard.remove(ship_icons[2])
 
         # Update ship reference to current ship in group
         if ships.sprites():
@@ -88,7 +104,7 @@ def main():
 
         # Remove unneeded objects
         ship = ship_collision_aliens(ship, ships, aliens, settings, window, bullets)
-        aliens_collision_bullets(aliens, bullets)
+        aliens_collision_bullets(aliens, bullets, settings)
         ship = aliens_screen_bottom(settings, aliens, ships, window, ship, bullets)
         destroy_game(settings, ships, aliens, bullets)
 
